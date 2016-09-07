@@ -1,0 +1,120 @@
+@import './../../node_modules/normalize.css/normalize.css';
+
+$serifStack : 'Abril Fatface', Georgia, 'Times New Roman', Times, serif;
+$sansSerifStack : 'Open Sans', 'Helvetica Neue', Helvetica, Arial, san-serif;
+
+$spacingUnit : 20px;
+
+$text : #313131;
+$lightGray : #f7f7f7;
+$primary : $text;
+
+
+body {
+font-family : $sansSerifStack;
+color: $primary;
+background: $lightGray;
+}
+
+.challenge-form {
+  max-width: 600px;
+  width: 90%;
+  margin: $spacingUnit  auto;
+  background : #fff;
+  // box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+.challenge-form form {
+  padding: 0 $spacingUnit $spacingUnit $spacingUnit;
+}
+
+.header {
+  padding: $spacingUnit 0 0 0;
+  text-align: center;
+}
+
+
+.header__title {
+margin: 1rem 0;
+font-weight: 400;
+font-size: 2.5rem;
+font-family: $serifStack;
+}
+
+.btn {
+}
+
+.btn--primary {
+display:block;
+margin: auto;
+}
+.section {
+  border: none;
+  line-height: 1.6;
+  margin-bottom: $spacingUnit;
+}
+
+label {
+  display : block;
+  font-weight: 600;
+}
+input {
+  display: block;
+  width: 100%;
+}
+
+input:invalid {
+  &:after {
+    content :"!";
+  }
+}
+
+.section__number {
+  position: relative;
+  right: 24px;
+  font-size: 1.5rem;
+  Z-index: 1;
+  display: inline-block;
+  &:after {
+    background: #fff;
+    position: absolute;
+    left: -16px;
+    top: -3px;
+    content : "";
+    border-radius : 50%;
+    border: 2px solid $primary;
+    display: block;
+    width: 40px;
+    height: 40px;
+    z-index:-1;
+  }
+}
+
+.section__title {
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin: $spacingUnit 0;
+  font-family: $serifStack;
+
+}
+
+.field-group {
+  margin-bottom: $spacingUnit/2;
+}
+
+.section {
+  background : $lightGray;
+  padding: $spacingUnit;
+}
+
+//https://stackoverflow.com/questions/19758598/what-is-sr-only-in-bootstrap-3
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
