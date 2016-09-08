@@ -1,35 +1,85 @@
 @import './../../node_modules/normalize.css/normalize.css';
-
+/* ==========================================================================
+   SASS Variables
+   ========================================================================== */
 $fontStack: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, san-serif;
-$fontEmphasisStack: $fontStack;
-
-
 $spacingUnit: 20px;
-
 $text: #6f6f6f;
 $lightGray: #f7f7f7;
-$primary: #349dbb;
+$primary: #3589bb;
 $error: #e63e4d;
 
-
+$smallScreenBreakPoint : 480px;
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
 body {
   color: $text;
   font-family: $fontStack;
   line-height: 1.5;
-  background-image: radial-gradient(lighten($primary, 40%), $primary);
+  @media (min-width: $smallScreenBreakPoint){
+    background-image: radial-gradient(lighten($primary, 40%), $primary);
+  }
 }
 
+label {
+  font-weight: 600;
+}
 
+select {
+  width: 100%;
+  height: $spacingUnit * 1.5;
+  margin-bottom: $spacingUnit;
+  border: 1px solid #dedede;
+}
+
+input {
+  display: block;
+  width: 100%;
+  border: 1px solid darken($lightGray, 10%);
+  height: $spacingUnit * 1.5;
+  background: $lightGray;
+}
+/* ==========================================================================
+  Utility Classes
+  ========================================================================== */
+//https://stackoverflow.com/questions/19758598/what-is-sr-only-in-bootstrap-3
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
+
+.bold-font {
+  font-weight: 600;
+}
+
+.half-width {
+  display: inline-block;
+  //50% doesn't work ?
+  width: 49%;
+  vertical-align: top;
+}
+/* ==========================================================================
+   Challenge Form Styles
+   ========================================================================== */
 .challenge-form {
   background: #fff;
   max-width: 480px;
-  width: 90%;
   margin: $spacingUnit auto;
-  box-shadow : 0 0 30px hsla(0, 0%, 0%, 0.32);
-}
-
-.challenge-form form {
-  padding: 0 $spacingUnit * 1.5 $spacingUnit * 1.5;
+  @media (min-width: $smallScreenBreakPoint){
+    box-shadow: 0 0 40px hsla(0, 0%, 0%, 0.3);
+  }
+  padding: 0 $spacingUnit $spacingUnit;
 }
 
 .header {
@@ -37,19 +87,17 @@ body {
   padding: $spacingUnit/2;
 }
 
-
-.header__description {
-  margin: 0 0 $spacingUnit 0;
-  font-weight: bold;
-  color: gray;
-}
 .header__title {
   font-weight: 600;
   font-size: 2.8rem;
   margin: $spacingUnit/2;
-font-family: $fontEmphasisStack;
-color: $primary;
+  color: $primary;
+}
 
+.header__description {
+  margin: 0 0 $spacingUnit;
+  font-weight: bold;
+  color: gray;
 }
 
 .btn {
@@ -63,130 +111,116 @@ color: $primary;
   font-size: 1.5rem;
 }
 
-.btn--primary {
+.btn--full-width {
   display: block;
   margin: auto;
-  background: linear-gradient(to right,  darken($primary, 10%), lighten($primary, 10%));
+}
+
+.btn--primary {
+  background: $primary;
   color: #fff;
 
   &:hover {
-    background: linear-gradient(to right,  darken($primary, 15%), lighten($primary, 15%));
+    background: darken($primary, 10%);
   }
 }
 
-.section {
+.fieldset {
   border: none;
   position: relative;
   padding: 0;
 }
 
-
-.section__header {
-  font-family: $fontEmphasisStack;
+.fieldset__header {
   font-size: 1.5rem;
-  color: $primary
-
+  color: $primary;
 }
 
-.section__container {
+.fieldset__number {
+  margin-right: $spacingUnit/2;
+  font-weight: bold;
+}
+
+.fieldset__container {
   padding-top: $spacingUnit/2;
 }
 
-label {
-  font-weight: 600;
+.fieldset__note {
+  font-size: 0.8rem;
 }
 
-.field__note {
-  font-size: .8rem;
-}
-
-input {
-  display: block;
-  width: 100%;
-  border: 1px solid darken($lightGray, 10%);
-  height: $spacingUnit * 1.5;
-  background: $lightGray;
-}
-
-select {
-  width: 49.5%;
-  border-radius: 0;
-  height: $spacingUnit * 1.5;
-  display: inline-block;
-  margin-bottom: $spacingUnit;
-  border: 1px solid #dedede;
-  border-radius: 0 !important;
-}
-
-//https://stackoverflow.com/questions/7920742/delay-html5-invalid-pseudo-class-until-the-first-event
-input:invalid.interacted-width {
+.fieldset__group {
   position: relative;
+  margin-bottom: $spacingUnit/2;
+}
+
+//show url domain in portfolio input field
+.portfolio-domain {
+  position: absolute;
+  right: 0;
+  background: darken($lightGray, 6%);
+  position: absolute;
+  right: -3px;
+  background: #e8e8e8;
+  top: 24px;
+  padding: 4.5px $spacingUnit;
+  font-weight: bold;
+  z-index: 1;
+  color: $primary;
+}
+
+//back up incase :invalid isnt working for some reason
+.invalid {
+  border: 1px solid $error;
+}
+//https://stackoverflow.com/questions/7920742/delay-html5-invalid-pseudo-class-until-the-first-event
+:invalid.show-warning {
   border-color: lighten($error, 20%);
 }
 
-input + .warning {
-  font-size: .8rem;
+input + .warning,
+select + .warning {
+  font-size: 0.8rem;
   visibility: hidden;
   color: $error;
   font-weight: bold;
   text-align: right;
 }
 
-input:invalid.interacted-width + .warning {
+.invalid + .warning,
+:invalid.show-warning + .warning {
   visibility: visible;
 }
 
-.section__number {
-  display: inline-block;
-  margin-right: $spacingUnit/2;
-  font-weight: bold;
-}
-
-//https://stackoverflow.com/questions/19758598/what-is-sr-only-in-bootstrap-3
-.sr-only {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  margin: -1px;
-  padding: 0;
-  width: 1px;
-  height: 1px;
-  border: 0;
+select + .warning {
+  position: relative;
+  top: -20px;
 }
 
 .sprite-container {
   position: absolute;
   right: 8px;
-  top: 72px;
-
+  top: 26px;
 }
 
 .sprite {
-width: 45px;
-height: 32px;
+  width: 45px;
+  height: 32px;
 }
-
 //image sprites
+
 .sprite--amex {
-background:url(./../images/sprite.png) 0 0;
+  background: url("./../images/sprite.png") 0 0;
 }
 
-.sprite--visa{
-  background:url(./../images/sprite.png) 142px 0;
+.sprite--visa {
+  background: url("./../images/sprite.png") 142px 0;
 }
 
 .sprite--discover {
-  background:url(./../images/sprite.png) 93px 0;
+  background: url("./../images/sprite.png") 93px 0;
 }
 
 .sprite--mastercard {
-  background:url(./../images/sprite.png) 45px 0;
-}
-
-.inline-block {
-  display: inline-block !important;
-}
-
-.bold-font {
-  font-weight : 600;
+  background: url("./../images/sprite.png") 45px 0;
 }

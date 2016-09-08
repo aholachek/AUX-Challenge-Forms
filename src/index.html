@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="cleartype" content="on">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
 
   <link rel="dns-prefetch" href="//ajax.googleapis.com">
@@ -20,102 +21,117 @@
       <div class="header">
         <h1 class="header__title">Sign Up for Whoo!</h1>
         <p class="header__description">
-          50 projects &nbsp;&#9679;&nbsp; 500 images &nbsp;&#9679;&nbsp; 10 videos <br/>
-          domain binding &nbsp;&#9679;&nbsp; technical support
+          50 projects <span aria-hidden="true" >&nbsp;&#9679;&nbsp;</span>
+           500 images <span aria-hidden="true" >&nbsp;&#9679;&nbsp;</span> 10 videos <br/>
+          domain binding <span aria-hidden="true" >&nbsp;&#9679;&nbsp;</span> technical support
         </p>
       </div>
 
       <form action="">
-        <fieldset class="section">
-          <legend class="section__header">
-            <span class="section__number">1</span>
-            <span class="section__title">Name your portfolio</span>
+        <fieldset class="fieldset">
+          <legend class="fieldset__header">
+            <span class="fieldset__number">1</span>
+            <span class="fieldset__title">Name your portfolio</span>
           </legend>
 
-            <div class="section__container">
-              <div class="field-group">
+            <div class="fieldset__container">
+              <div class="fieldset__group">
                 <label for="portfolio-name">Portfolio name</label>
                 <input type="text" id="portfolio-name" required/>
                 <div class="warning"> This field is required.</div>
 
               </div>
-              <div class="field-group">
+              <div class="fieldset__group">
                 <label for="portfolio-address">Portfolio address</label>
-                <input type="url" id="portfolio-address" required />
+                <span class="portfolio-domain">.sample.com</span>
+                <input type="text" id="portfolio-address" required />
                 <div class="warning"> This field is required.</div>
               </div>
             </div>
 
         </fieldset>
-        <fieldset class="section">
-          <legend class="section__header">
-            <span class="section__number">2</span>
-            <span class="section__title">Enter your account details</span>
+        <fieldset class="fieldset">
+          <legend class="fieldset__header">
+            <span class="fieldset__number">2</span>
+            <span class="fieldset__title">Enter your account details</span>
           </legend>
 
-            <div class="section__container">
-              <div class="field-group">
+            <div class="fieldset__container">
+              <div class="fieldset__group">
                 <label for="person-name">Name</label>
                 <input type="text" id="person-name" required />
                 <div class="warning"> This field is required.</div>
 
               </div>
-              <div class="field-group">
+              <div class="fieldset__group">
                   <label for="person-password inline-block">Email</label>
-                  <span class="field__note">We'll never share your email, promise.</span>
+                  <span class="fieldset__note" id="email-note">We'll never share your email, promise.</span>
 
-                  <input type="email" id="person-email" required/>
+                  <input
+                  type="email"
+                  id="person-email"
+                  required
+                  aria-describedby="email-note"/>
                   <div class="warning"> This required field must be in the form of an email.</div>
               </div>
-              <div class="field-group">
-                <label for="person-password">Password</label>
-                <input type="text" id="person-password" required />
-                <div class="warning"> This required field must be in the form of an email.</div>
-
+              <div class="fieldset__group">
+                <label for="person-password inline-block">Password</label>
+                <span class="fieldset__note" id="password-note">At least 4 characters and at least 1 number and 1 letter.</span>
+                <input
+                type="text"
+                id="person-password"
+                required
+                pattern="((?=.*\d)(?=.*[A-Za-z]).{4,})" 
+                aria-describedbuy="password-note"/>
+                <div class="warning"> Password does not meet minimum security requirements.</div>
               </div>
 
             </div>
 
         </fieldset>
 
-        <fieldset class="section">
-          <legend class="section__header">
-            <span class="section__number">3</span>
-            <span class="section__title">Enter your payment information</span>
+        <fieldset class="fieldset">
+          <legend class="fieldset__header">
+            <span class="fieldset__number">3</span>
+            <span class="fieldset__title">Enter your payment information</span>
           </legend>
 
-            <div class="section__container">
+            <div class="fieldset__container">
 
-              <div class="field-group">
-                <label for="card-number">Card number</label>
-                <div class="sprite-container"></div>
+              <div class="fieldset__group">
+                <label for="card-number">Card number <span class="sprite-container"></span></label>
                 <input type="text" id="card-number" required />
                 <div class="warning">Please enter a valid credit card number.</div>
               </div>
-              <div class="field-group">
+              <div class="fieldset__group">
                 <label for="security-code">Security Code</label>
-                <input type="text" id="security-code" required />
+                <input type="text" id="security-code" required pattern="\d{3}" />
                 <div class="warning">Please enter a 3 digit number.</div>
               </div>
-              <div class="field-group">
+              <div class="fieldset__group">
                 <div class="bold-font"> Expiration date</div>
+                <div class="half-width">
+                  <label for="expiration-month" class="sr-only">Expiration month</label>
+                  <select name="month" id="expiration-month" required>
+                    <option selected disabled value="Month">Month</option>
+                  </select>
+                  <div class="warning">Please choose a month.</div>
+                </div>
+                <div class="half-width">
+                  <label for="expiration-year" class="sr-only">Expiration month</label>
+                  <select name="year" id="expiration-year" required>
+                    <option selected disabled value="Year">Year</option>
+                  </select>
+                  <div class="warning">Please choose a year.</div>
+                </div>
 
-                <label for="expiration-month" class="sr-only">Expiration month</label>
-                <select name="month" id="expiration-month" required>
-                  <option selected disabled>Month</option>
-                </select>
-
-                <label for="expiration-year" class="sr-only">Expiration month</label>
-                <select name="year" id="expiration-year" required>
-                  <option selected disabled>Year</option>
-                </select>
               </div>
 
             </div>
 
         </fieldset>
 
-        <button class="btn btn--primary js-submit" type="submit">Create your portfolio</button>
+        <button class="btn btn--primary btn--full-width js-submit" type="submit">Create your portfolio</button>
       </form>
 
   </div>
