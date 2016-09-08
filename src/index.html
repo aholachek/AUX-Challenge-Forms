@@ -9,7 +9,7 @@
   <link rel="dns-prefetch" href="//ajax.googleapis.com">
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
 
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300.400,500,600,700|Abril+Fatface">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300.400,500,600">
 
 </head>
 
@@ -27,42 +27,51 @@
 
       <form action="">
         <fieldset class="section">
-          <legend>
+          <legend class="section__header">
             <span class="section__number">1</span>
-            <span class="section__title">First, name your portfolio</span>
+            <span class="section__title">Name your portfolio</span>
           </legend>
 
             <div class="section__container">
               <div class="field-group">
                 <label for="portfolio-name">Portfolio name</label>
                 <input type="text" id="portfolio-name" required/>
+                <div class="warning"> This field is required.</div>
+
               </div>
               <div class="field-group">
                 <label for="portfolio-address">Portfolio address</label>
                 <input type="url" id="portfolio-address" required />
+                <div class="warning"> This field is required.</div>
               </div>
             </div>
 
         </fieldset>
         <fieldset class="section">
-          <legend>
+          <legend class="section__header">
             <span class="section__number">2</span>
-            <span class="section__title">Now, enter your account details</span>
+            <span class="section__title">Enter your account details</span>
           </legend>
 
             <div class="section__container">
               <div class="field-group">
                 <label for="person-name">Name</label>
                 <input type="text" id="person-name" required />
+                <div class="warning"> This field is required.</div>
+
               </div>
               <div class="field-group">
-                  <label for="person-password">Email</label>
+                  <label for="person-password inline-block">Email</label>
+                  <span class="field__note">We'll never share your email, promise.</span>
+
                   <input type="email" id="person-email" required/>
-                  <span class="field-warning">Note: we'll never share your email, promise.</span>
+                  <div class="warning"> This required field must be in the form of an email.</div>
               </div>
               <div class="field-group">
                 <label for="person-password">Password</label>
                 <input type="text" id="person-password" required />
+                <div class="warning"> This required field must be in the form of an email.</div>
+
               </div>
 
             </div>
@@ -70,23 +79,26 @@
         </fieldset>
 
         <fieldset class="section">
-          <legend>
+          <legend class="section__header">
             <span class="section__number">3</span>
-            <span class="section__title">Finally, enter your payment information</span>
+            <span class="section__title">Enter your payment information</span>
           </legend>
 
             <div class="section__container">
 
               <div class="field-group">
                 <label for="card-number">Card number</label>
+                <div class="sprite-container"></div>
                 <input type="text" id="card-number" required />
+                <div class="warning">Please enter a valid credit card number.</div>
               </div>
               <div class="field-group">
                 <label for="security-code">Security Code</label>
                 <input type="text" id="security-code" required />
+                <div class="warning">Please enter a 3 digit number.</div>
               </div>
               <div class="field-group">
-                <div> Expiration date</div>
+                <div class="bold-font"> Expiration date</div>
 
                 <label for="expiration-month" class="sr-only">Expiration month</label>
                 <select name="month" id="expiration-month" required>

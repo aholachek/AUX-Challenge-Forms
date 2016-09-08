@@ -1,8 +1,8 @@
-
-//hack to get webpack devserver to watch index.html
-
 require('./scss/styles.scss');
+//hack to get webpack devserver to watch index.html
 require('./index.html');
+
+var cardvalidate = require('credit-card-validation');
 
 function addSelectVals(){
   var monthSelect = document.getElementById('expiration-month'),
@@ -35,11 +35,37 @@ function addSelectVals(){
 
 document.addEventListener('DOMContentLoaded', function(event) {
 
+  //add month and year selects
   addSelectVals();
 
-  // document.querySelector('.js-submit').addEventListener('click', function(){
-  //   alert('form submitted!');
-  // })
+  //only show invalid styles once user has blurred out of a field
+  [].slice.apply(document.querySelectorAll('input')).forEach(function(el){
 
+    //the first time an element is blurred, add a class to facilitate CSS :invalid styling
+    function addNoticeOnBlur(){
+        this.className += ' interacted-width';
+        this.removeEventListener('blur', addNoticeOnBlur);
+    }
+
+    var listener = el.addEventListener('blur', addNoticeOnBlur);
+
+  });
+
+  //credit card validation
+  document.getElementById('card-number').addEventListener('change', function(){
+
+    var card = cardvalidate(this.value);
+    var spriteContainer = document.querySelector('.sprite-container');
+
+    if (card.isValid()){
+      var sprite = document.createElement('div');
+      sprite.className = 'sprite sprite--' + card.type ;
+      spriteContainer.innerHTML = '';
+      spriteContainer.appendChild(sprite);
+    } else {
+      spriteContainer.innerHTML = '';
+    }
+
+  });
 
 });

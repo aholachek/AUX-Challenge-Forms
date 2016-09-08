@@ -1,120 +1,192 @@
 @import './../../node_modules/normalize.css/normalize.css';
 
-$serifStack : 'Abril Fatface', Georgia, 'Times New Roman', Times, serif;
-$sansSerifStack : 'Open Sans', 'Helvetica Neue', Helvetica, Arial, san-serif;
+$fontStack: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, san-serif;
+$fontEmphasisStack: $fontStack;
 
-$spacingUnit : 20px;
 
-$text : #313131;
-$lightGray : #f7f7f7;
-$primary : $text;
+$spacingUnit: 20px;
+
+$text: #6f6f6f;
+$lightGray: #f7f7f7;
+$primary: #349dbb;
+$error: #e63e4d;
 
 
 body {
-font-family : $sansSerifStack;
-color: $primary;
-background: $lightGray;
+  color: $text;
+  font-family: $fontStack;
+  line-height: 1.5;
+  background-image: radial-gradient(lighten($primary, 40%), $primary);
 }
 
+
 .challenge-form {
-  max-width: 600px;
+  background: #fff;
+  max-width: 480px;
   width: 90%;
-  margin: $spacingUnit  auto;
-  background : #fff;
-  // box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  margin: $spacingUnit auto;
+  box-shadow : 0 0 30px hsla(0, 0%, 0%, 0.32);
 }
 
 .challenge-form form {
-  padding: 0 $spacingUnit $spacingUnit $spacingUnit;
+  padding: 0 $spacingUnit * 1.5 $spacingUnit * 1.5;
 }
 
 .header {
-  padding: $spacingUnit 0 0 0;
   text-align: center;
+  padding: $spacingUnit/2;
 }
 
 
+.header__description {
+  margin: 0 0 $spacingUnit 0;
+  font-weight: bold;
+  color: gray;
+}
 .header__title {
-margin: 1rem 0;
-font-weight: 400;
-font-size: 2.5rem;
-font-family: $serifStack;
+  font-weight: 600;
+  font-size: 2.8rem;
+  margin: $spacingUnit/2;
+font-family: $fontEmphasisStack;
+color: $primary;
+
 }
 
 .btn {
+  padding: $spacingUnit/2 $spacingUnit;
+  border: 0;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-size: 1.5rem;
 }
 
 .btn--primary {
-display:block;
-margin: auto;
+  display: block;
+  margin: auto;
+  background: linear-gradient(to right,  darken($primary, 10%), lighten($primary, 10%));
+  color: #fff;
+
+  &:hover {
+    background: linear-gradient(to right,  darken($primary, 15%), lighten($primary, 15%));
+  }
 }
+
 .section {
   border: none;
-  line-height: 1.6;
-  margin-bottom: $spacingUnit;
+  position: relative;
+  padding: 0;
+}
+
+
+.section__header {
+  font-family: $fontEmphasisStack;
+  font-size: 1.5rem;
+  color: $primary
+
+}
+
+.section__container {
+  padding-top: $spacingUnit/2;
 }
 
 label {
-  display : block;
   font-weight: 600;
 }
+
+.field__note {
+  font-size: .8rem;
+}
+
 input {
   display: block;
   width: 100%;
+  border: 1px solid darken($lightGray, 10%);
+  height: $spacingUnit * 1.5;
+  background: $lightGray;
 }
 
-input:invalid {
-  &:after {
-    content :"!";
-  }
+select {
+  width: 49.5%;
+  border-radius: 0;
+  height: $spacingUnit * 1.5;
+  display: inline-block;
+  margin-bottom: $spacingUnit;
+  border: 1px solid #dedede;
+  border-radius: 0 !important;
+}
+
+//https://stackoverflow.com/questions/7920742/delay-html5-invalid-pseudo-class-until-the-first-event
+input:invalid.interacted-width {
+  position: relative;
+  border-color: lighten($error, 20%);
+}
+
+input + .warning {
+  font-size: .8rem;
+  visibility: hidden;
+  color: $error;
+  font-weight: bold;
+  text-align: right;
+}
+
+input:invalid.interacted-width + .warning {
+  visibility: visible;
 }
 
 .section__number {
-  position: relative;
-  right: 24px;
-  font-size: 1.5rem;
-  Z-index: 1;
   display: inline-block;
-  &:after {
-    background: #fff;
-    position: absolute;
-    left: -16px;
-    top: -3px;
-    content : "";
-    border-radius : 50%;
-    border: 2px solid $primary;
-    display: block;
-    width: 40px;
-    height: 40px;
-    z-index:-1;
-  }
-}
-
-.section__title {
-  font-weight: 300;
-  font-size: 1.5rem;
-  margin: $spacingUnit 0;
-  font-family: $serifStack;
-
-}
-
-.field-group {
-  margin-bottom: $spacingUnit/2;
-}
-
-.section {
-  background : $lightGray;
-  padding: $spacingUnit;
+  margin-right: $spacingUnit/2;
+  font-weight: bold;
 }
 
 //https://stackoverflow.com/questions/19758598/what-is-sr-only-in-bootstrap-3
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
   overflow: hidden;
   clip: rect(0,0,0,0);
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
   border: 0;
+}
+
+.sprite-container {
+  position: absolute;
+  right: 8px;
+  top: 72px;
+
+}
+
+.sprite {
+width: 45px;
+height: 32px;
+}
+
+//image sprites
+.sprite--amex {
+background:url(./../images/sprite.png) 0 0;
+}
+
+.sprite--visa{
+  background:url(./../images/sprite.png) 142px 0;
+}
+
+.sprite--discover {
+  background:url(./../images/sprite.png) 93px 0;
+}
+
+.sprite--mastercard {
+  background:url(./../images/sprite.png) 45px 0;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
+
+.bold-font {
+  font-weight : 600;
 }
