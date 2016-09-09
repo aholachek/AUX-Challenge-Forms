@@ -35,14 +35,14 @@ function addSelectVals() {
 
 }
 
-function checkCardValid (){
-    var card = cardValidate(document.getElementById('card-number').value);
-    return card.isValid();
+function checkCardValid() {
+  var card = cardValidate(document.getElementById('card-number').value);
+  return card.isValid();
 }
 
-function updateCardValidity (){
-  var input  = document.getElementById('card-number');
-  if (!checkCardValid()){
+function updateCardValidity() {
+  var input = document.getElementById('card-number');
+  if (!checkCardValid()) {
     if (!/invalid/.test(input.className)) input.className += ' invalid';
     //clear out any sprite, if it is there
     document.querySelector('.sprite-container').innerHTML = '';
@@ -53,23 +53,23 @@ function updateCardValidity (){
 
 function enableCreditCardValidation() {
   //credit card validation
-  function onChange(){
-      var card = cardValidate(this.value);
-      var spriteContainer = document.querySelector('.sprite-container');
+  function onChange() {
+    var card = cardValidate(this.value);
+    var spriteContainer = document.querySelector('.sprite-container');
 
-      if (card.isValid()) {
-        var sprite = document.createElement('div');
-        sprite.className = 'sprite sprite--' + card.type;
-        sprite.setAttribute('aria-label',  card.type);
-        spriteContainer.innerHTML = '';
-        spriteContainer.appendChild(sprite);
-      } else {
-        spriteContainer.innerHTML = '';
-        showWarning.call(this);
-      }
-
-      updateCardValidity();
+    if (card.isValid()) {
+      var sprite = document.createElement('div');
+      sprite.className = 'sprite sprite--' + card.type;
+      sprite.setAttribute('aria-label', card.type);
+      spriteContainer.innerHTML = '';
+      spriteContainer.appendChild(sprite);
+    } else {
+      spriteContainer.innerHTML = '';
+      showWarning.call(this);
     }
+
+    updateCardValidity();
+  }
 
   document.getElementById('card-number').addEventListener('keyup', onChange);
 
@@ -123,12 +123,12 @@ function addSubmitListener() {
         if (el.tagName === 'SELECT') checkSelectValid.call(el);
       });
 
-      updateCardValidity();
+    updateCardValidity();
 
   });
 
-  document.querySelector('.challenge-form form').addEventListener('submit', function(){
-    if ( !this.checkValidity() || !checkCardValid() ){
+  document.querySelector('.challenge-form form').addEventListener('submit', function() {
+    if (!this.checkValidity() || !checkCardValid()) {
       return false;
     } else {
       alert('Congrats! Form is valid and can be submitted.');
