@@ -6,4 +6,4 @@
 5. Use webpack so that I can use CommonJS/SASS easily.
 6. Use aria attributes such as aria-hidden and aria-describedby where appropriate.
 
-You can check out screenshots with/ without CSS in the presentation directory.
+[View the form](http://alex.holachek.com/projects/challenge-form/)
