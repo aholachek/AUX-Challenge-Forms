@@ -3,13 +3,15 @@
    SASS Variables
    ========================================================================== */
 $fontStack: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, san-serif;
+$serifStack: Merriweather, 'Times New Roman', serif;
 $spacingUnit: 20px;
 $text: #6f6f6f;
 $lightGray: #f7f7f7;
-$primary: #3589bb;
+$secondary: #7CB4D4;
+$primary: #146A83;
+$success: #8CA632;
 $error: #e63e4d;
-
-$smallScreenBreakPoint : 480px;
+$smallScreenBreakPoint: 480px;
 /* ==========================================================================
    Base Styles
    ========================================================================== */
@@ -17,9 +19,10 @@ body {
   color: $text;
   font-family: $fontStack;
   line-height: 1.5;
-  @media (min-width: $smallScreenBreakPoint){
-    background-image: radial-gradient(lighten($primary, 40%), $primary);
+  @media (min-width: $smallScreenBreakPoint) {
+    background-image: radial-gradient(lighten($secondary, 40%), $secondary);
   }
+  padding-top: $spacingUnit * 2;
 }
 
 label {
@@ -28,7 +31,7 @@ label {
 
 select {
   width: 100%;
-  height: $spacingUnit * 1.5;
+  height: 34px;
   margin-bottom: $spacingUnit;
   border: 1px solid #dedede;
 }
@@ -44,6 +47,7 @@ input {
   Utility Classes
   ========================================================================== */
 //https://stackoverflow.com/questions/19758598/what-is-sr-only-in-bootstrap-3
+
 .sr-only {
   position: absolute;
   overflow: hidden;
@@ -60,7 +64,7 @@ input {
 }
 
 .bold-font {
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 
 .half-width {
@@ -69,6 +73,10 @@ input {
   width: 49%;
   vertical-align: top;
 }
+
+.text-align-left {
+  text-align: left !important;
+}
 /* ==========================================================================
    Challenge Form Styles
    ========================================================================== */
@@ -76,28 +84,37 @@ input {
   background: #fff;
   max-width: 480px;
   margin: $spacingUnit auto;
-  @media (min-width: $smallScreenBreakPoint){
+  @media (min-width: $smallScreenBreakPoint) {
     box-shadow: 0 0 40px hsla(0, 0%, 0%, 0.3);
   }
   padding: 0 $spacingUnit $spacingUnit;
+  border-radius: 8px;
+
+  form {
+    margin: $spacingUnit * 2 0;
+  }
 }
 
 .header {
   text-align: center;
   padding: $spacingUnit/2;
+  background: $primary;
+  margin: 0 -$spacingUnit;
+  color: #fff;
+  border-radius: 8px 8px 0 0;
 }
 
 .header__title {
   font-weight: 600;
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   margin: $spacingUnit/2;
-  color: $primary;
+  font-family: $serifStack;
 }
 
 .header__description {
   margin: 0 0 $spacingUnit;
   font-weight: bold;
-  color: gray;
+  color: lighten($secondary, 15%);
 }
 
 .btn {
@@ -116,12 +133,12 @@ input {
   margin: auto;
 }
 
-.btn--primary {
-  background: $primary;
+.btn--success {
+  background: #8CA632;
   color: #fff;
 
   &:hover {
-    background: darken($primary, 10%);
+    background: darken(#8CA632, 10%);
   }
 }
 
@@ -132,13 +149,29 @@ input {
 }
 
 .fieldset__header {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: $primary;
+  font-family: $serifStack;
 }
 
 .fieldset__number {
-  margin-right: $spacingUnit/2;
   font-weight: bold;
+  position: relative;
+  top: -2px;
+  margin-right: $spacingUnit * 1.5;
+  color: #fff;
+  z-index: 1;
+  &:after {
+    background-color:  $primary;
+    z-index: -1;
+    position: absolute;
+    border-radius: 50%;
+    content: "";
+    width: 40px;
+    height: 40px;
+    left: -15px;
+    top: -5px;
+  }
 }
 
 .fieldset__container {
@@ -147,6 +180,7 @@ input {
 
 .fieldset__note {
   font-size: 0.8rem;
+  font-weight: 300;
 }
 
 .fieldset__group {
@@ -154,6 +188,20 @@ input {
   margin-bottom: $spacingUnit/2;
 }
 
+.fieldset__group--security {
+  float: left;
+  width: 30%;
+}
+
+.fieldset__group--expiration {
+  float: left;
+  width: 45%;
+  margin-left: 5%;
+}
+
+#card-number {
+  width: 50%;
+}
 //show url domain in portfolio input field
 .portfolio-domain {
   position: absolute;
@@ -162,18 +210,18 @@ input {
   position: absolute;
   right: -3px;
   background: #e8e8e8;
-  top: 24px;
-  padding: 4.5px $spacingUnit;
+  top: 25.5px;
+  padding: 3px $spacingUnit;
   font-weight: bold;
   z-index: 1;
   color: $primary;
 }
-
 //back up incase :invalid isnt working for some reason
 .invalid {
   border: 1px solid $error;
 }
 //https://stackoverflow.com/questions/7920742/delay-html5-invalid-pseudo-class-until-the-first-event
+
 :invalid.show-warning {
   border-color: lighten($error, 20%);
 }
@@ -197,30 +245,65 @@ select + .warning {
   top: -20px;
 }
 
-.sprite-container {
-  position: absolute;
-  right: 8px;
-  top: 26px;
-}
-
-.sprite {
+.card-sprite {
   width: 45px;
   height: 32px;
+  display:inline-block;
 }
+
+.card-sprite-container {
+  position: absolute;
+  right: 6%;
+}
+
 //image sprites
 
-.sprite--amex {
+.card-sprite--amex.faded {
+  background: url("./../images/sprite.png") 0 -40px;
+}
+
+.card-sprite--visa.faded {
+  background: url("./../images/sprite.png") 142px -40px;
+}
+
+.card-sprite--discover.faded {
+  background: url("./../images/sprite.png") 93px -40px;
+}
+
+.card-sprite--mastercard.faded {
+  background: url("./../images/sprite.png") 45px -40px;
+}
+
+.card-sprite--amex {
   background: url("./../images/sprite.png") 0 0;
 }
 
-.sprite--visa {
+.card-sprite--visa {
   background: url("./../images/sprite.png") 142px 0;
 }
 
-.sprite--discover {
+.card-sprite--discover {
   background: url("./../images/sprite.png") 93px 0;
 }
 
-.sprite--mastercard {
+.card-sprite--mastercard {
   background: url("./../images/sprite.png") 45px 0;
+}
+
+.security-sprite {
+  background: url(/build/20664a1b40d563b8458bf0b4b06be3f1.png) 0 62px;
+  width: 65px;
+  height: 32px;
+  position: absolute;
+  top: 24px;
+  right: 7%;
+}
+
+.expiration-sprite {
+  background: url(/build/20664a1b40d563b8458bf0b4b06be3f1.png) 0 105px;
+  width: 71px;
+  height: 33px;
+  position: absolute;
+  top: 24px;
+  right: -38%;
 }

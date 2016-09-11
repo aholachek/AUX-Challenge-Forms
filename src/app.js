@@ -3,6 +3,7 @@ require('./scss/styles.scss');
 require('./index.html');
 
 var cardValidate = require('credit-card-validation');
+var _ = require('lodash');
 
 require('./form_polyfill')
 
@@ -35,6 +36,15 @@ function addSelectVals() {
 
 }
 
+//from https://stackoverflow.com/questions/72768/how-do-you-detect-credit-card-type-based-on-number
+
+var cardPatterns = {
+  amex : /^34|^37/,
+  visa : /^4/,
+  discover : /^6011|^644|^65/,
+  mastercard : /^5[1-5]/
+};
+
 function checkCardValid() {
   var card = cardValidate(document.getElementById('card-number').value);
   return card.isValid();
@@ -44,8 +54,7 @@ function updateCardValidity() {
   var input = document.getElementById('card-number');
   if (!checkCardValid()) {
     if (!/invalid/.test(input.className)) input.className += ' invalid';
-    //clear out any sprite, if it is there
-    document.querySelector('.sprite-container').innerHTML = '';
+
   } else {
     input.className = input.className.replace('invalid', '')
   }
@@ -54,19 +63,21 @@ function updateCardValidity() {
 function enableCreditCardValidation() {
   //credit card validation
   function onChange() {
-    var card = cardValidate(this.value);
+    var currentVal = this.value;
+    var card = cardValidate(currentVal);
     var spriteContainer = document.querySelector('.sprite-container');
 
-    if (card.isValid()) {
-      var sprite = document.createElement('div');
-      sprite.className = 'sprite sprite--' + card.type;
-      sprite.setAttribute('aria-label', card.type);
-      spriteContainer.innerHTML = '';
-      spriteContainer.appendChild(sprite);
-    } else {
-      spriteContainer.innerHTML = '';
-      showWarning.call(this);
-    }
+
+    [].slice.apply(document.querySelectorAll('.card-sprite')).forEach(function(el){
+      addClass.call(el, 'faded');
+    });
+
+    //check if matches any cc patterns, just the beginning
+    _.forEach(cardPatterns, function(p, k){
+      if (currentVal.match(p)){
+        removeClass.call(document.querySelector('.card-sprite--' + k ), 'faded')
+      }
+    }, this);
 
     updateCardValidity();
   }
@@ -99,11 +110,19 @@ function enableSelectValidation() {
     });
 }
 
+function addClass(cl){
+  if (!(new RegExp(cl).test(this.className))){
+    this.className += ' ' + cl;
+  }
+}
+
+function removeClass(cl){
+  return this.className = this.className.replace(cl, '');
+}
+
 //called with context of an element
 function showWarning() {
-  if (!/show-warning/.test(this.className)) {
-    this.className += ' show-warning';
-  }
+  addClass.call(this, 'show-warning')
 }
 
 //the first time an element is blurred, add a class to facilitate CSS :invalid styling
