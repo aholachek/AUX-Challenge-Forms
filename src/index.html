@@ -39,18 +39,22 @@
             <input type="text" id="portfolio-name" required aria-required="true"/>
             <div class="warning"> This field is required.</div>
             </label>
-
           </div>
           <div class="fieldset__group">
             <label for="portfolio-address">Portfolio address
-            <span class="sr-only">
+            <span class="sr-only" id="portfolio-sr-note">
               Type in only the unique name of your
                portfolio. It will be followed by the top-level domain name .sample.com
             </span>
             <span class="portfolio-domain" aria-hidden="true">
             .sample.com
           </span>
-            <input type="text" id="portfolio-address" required aria-required="true" />
+            <input type="text"
+            id="portfolio-address"
+            required
+            aria-required="true"
+            aria-describedby="portfolio-sr-note"
+             />
             <div class="warning"> This field is required.</div>
             </label>
           </div>
@@ -72,14 +76,14 @@
             </label>
           </div>
           <div class="fieldset__group">
-            <label for="person-password inline-block">Email
+            <label for="person-email">Email
             <span class="fieldset__note" id="email-note">We'll never share your email, promise.</span>
             <input type="email" id="person-email" required aria-required="true" aria-describedby="email-note" />
             <div class="warning"> This required field must be in the form of an email.</div>
             </label>
           </div>
           <div class="fieldset__group">
-            <label for="person-password inline-block">Password
+            <label for="person-password">Password
             <span class="fieldset__note" id="password-note">At least 4 characters and at least 1 number and 1 letter.</span>
             <input
             type="text"

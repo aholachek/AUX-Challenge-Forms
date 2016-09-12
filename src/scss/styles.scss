@@ -291,7 +291,7 @@ select + .warning {
 }
 
 .security-sprite {
-  background: url(/build/20664a1b40d563b8458bf0b4b06be3f1.png) 0 62px;
+  background: url("./../images/sprite.png") 0 62px;
   width: 65px;
   height: 32px;
   position: absolute;
@@ -300,7 +300,7 @@ select + .warning {
 }
 
 .expiration-sprite {
-  background: url(/build/20664a1b40d563b8458bf0b4b06be3f1.png) 0 105px;
+  background: url("./../images/sprite.png") 0 105px;
   width: 71px;
   height: 33px;
   position: absolute;
