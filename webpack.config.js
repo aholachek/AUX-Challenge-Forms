@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
+
 
 module.exports = {
     entry: [
@@ -28,7 +30,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style", "css", "sass", "postcss"]
       },
       {
         test: /\.html$/,
@@ -40,5 +42,9 @@ module.exports = {
       } // inline base64 URLs for <=8k images, direct URLs for the rest
 
     ]
-  }
+  },
+
+  postcss: function () {
+       return [autoprefixer];
+   }
 };
