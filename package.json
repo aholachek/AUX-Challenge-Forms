@@ -4,9 +4,9 @@
   "description": "**GIT help**: http://www.csskarma.com/cheat/git/",
   "main": "index.js",
   "scripts": {
-    "start": "cp ./src/index.html ./build && npm run dev",
-    "dev": "webpack-dev-server --hot",
-    "dist": "webpack"
+    "start": "npm run dev",
+    "dev": "NODE_ENV='development' webpack-dev-server --hot --inline",
+    "dist": "NODE_ENV='production' webpack -p"
   },
   "repository": {
     "type": "git",

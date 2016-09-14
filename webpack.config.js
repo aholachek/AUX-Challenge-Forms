@@ -2,31 +2,27 @@ var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 
-
-module.exports = {
-    entry: [
-      './src/app.js',
-      'webpack-hot-middleware/client?reload=true',
-    ],
-    output: {
-    filename: "app.js",
+const config = {
+  entry: [
+      './src/app.js'
+        ],
+  output: {
     path: path.resolve(__dirname, './build'),
-    publicPath: '',
     filename: 'bundle.js'
-    },
+  },
 
-    plugins: [
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false,
-        //     },
-        //     output: {
-        //         comments: false,
-        //     },
-        // }),
+  plugins: [
+      //this provides process.env.NODE_ENV to the client side code
+      //if you want to run different bits of code based on the NODE_ENV
+      // which is otherwise unreachable for client code
+        new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }
+    })
     ],
 
-    module: {
+  module: {
     loaders: [
       {
         test: /\.scss$/,
@@ -34,7 +30,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-          loader: 'file?name=[name].[ext]'
+        loader: 'file?name=[name].[ext]'
       },
       {
         test: /\.(png|jpg)$/,
@@ -44,7 +40,30 @@ module.exports = {
     ]
   },
 
-  postcss: function () {
-       return [autoprefixer];
-   }
+  postcss: function() {
+    return [autoprefixer];
+  }
 };
+
+//conditional plugins
+if (process.env.NODE_ENV === 'production') {
+
+  [].push.apply(config.plugins, [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: false,
+      sourcemap: false
+    })
+  ]);
+
+} else {
+
+  [].push.apply(config.plugins, [
+    new webpack.HotModuleReplacementPlugin()
+  ]);
+
+
+}
+
+module.exports = config;
