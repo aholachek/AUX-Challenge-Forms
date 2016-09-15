@@ -21,8 +21,8 @@ body {
   line-height: 1.5;
   @media (min-width: $smallScreenBreakPoint) {
     background-image: radial-gradient(lighten($secondary, 40%), $secondary);
+    padding-top: $spacingUnit * 2;
   }
-  padding-top: $spacingUnit * 2;
 }
 
 label {
@@ -72,9 +72,8 @@ input {
 }
 
 .half-width {
-  display: inline-block;
-  width: 49%;
-  vertical-align: top;
+    float: left;
+    width: 50%;
 }
 
 .text-align-left {
@@ -91,8 +90,9 @@ input {
     box-shadow: 0 0 40px hsla(0, 0%, 0%, 0.3);
   }
   padding: 0 $spacingUnit $spacingUnit;
-  border-radius: 8px;
-
+    @media (min-width: $smallScreenBreakPoint) {
+      border-radius: 8px;
+    }
   form {
     margin: $spacingUnit * 2 0;
   }
@@ -104,7 +104,9 @@ input {
   background: $primary;
   margin: 0 -$spacingUnit;
   color: #fff;
-  border-radius: 8px 8px 0 0;
+  @media(min-width: $smallScreenBreakPoint) {
+    border-radius: 8px 8px 0 0;
+  }
 }
 
 .header__title {
@@ -152,9 +154,12 @@ input {
 }
 
 .fieldset__header {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: $primary;
   font-family: $serifStack;
+  @media (min-width: $smallScreenBreakPoint) {
+    font-size: 1.3rem;
+  }
 }
 
 .fieldset__number {
@@ -178,7 +183,7 @@ input {
 }
 
 .fieldset__container {
-  padding-top: $spacingUnit/2;
+  padding-top: $spacingUnit;
 }
 
 .fieldset__note {
@@ -192,18 +197,25 @@ input {
 }
 
 .fieldset__group--security {
-  float: left;
-  width: 30%;
+  width: 50%;
+  @media(min-width: $smallScreenBreakPoint) {
+    float: left;
+    width: 30%;
+  }
 }
 
 .fieldset__group--expiration {
-  float: left;
-  width: 45%;
-  margin-left: 5%;
+  @media(min-width: $smallScreenBreakPoint) {
+    float: left;
+    width: 45%;
+    margin-left: 5%;
+  }
 }
 
 #card-number {
-  width: 50%;
+  @media(min-width: $smallScreenBreakPoint) {
+    width: 50%;
+  }
 }
 //show url domain in portfolio input field
 .portfolio-domain {
@@ -255,8 +267,10 @@ select + .warning {
 }
 
 .card-sprite-container {
-  position: absolute;
-  right: 6%;
+  @media(min-width: $smallScreenBreakPoint) {
+    position: absolute;
+    right: 6%;
+  }
 }
 
 //image sprites
@@ -308,5 +322,17 @@ select + .warning {
   height: 33px;
   position: absolute;
   top: 24px;
-  right: -38%;
+  left: 70%;
+  @media (min-width: $smallScreenBreakPoint) {
+  left: 105%;
+  }
+}
+
+.expiration-select-container {
+  width: 32%;
+  float: left;
+  margin-left: 5px;
+  @media (min-width: $smallScreenBreakPoint) {
+    width: 46%;
+  }
 }

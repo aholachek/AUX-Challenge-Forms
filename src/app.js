@@ -2,8 +2,6 @@ require('./scss/styles.scss');
 //hack to get webpack devserver to watch index.html
 require('./index.html');
 
-debugger
-
 var cardValidate = require('credit-card-validation');
 var _ = require('lodash');
 
