@@ -7,3 +7,8 @@
 6. Use aria attributes such as aria-hidden and aria-describedby where appropriate.
 
 [View the form](http://alex.holachek.com/projects/challenge-form/)
+
+Didn't get to:
+1. Browser testing
+2. Testing in general
+3. Fixing the Flash-of-Unstyled-Content issue 
